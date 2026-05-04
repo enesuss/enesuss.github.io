@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,9 +26,7 @@
 }
 </script>
 <style>
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -48,6 +45,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variant-numeric: oldstyle-nums;
+  font-size: 16px;
 }
 
 
@@ -174,22 +172,22 @@ h2::after {
 .bio-text p { margin-bottom: 14px; }
 .bio-text p:last-child { margin-bottom: 0; }
 
+/* Clean links — no underline, dot accent on hover */
 .bio-text a,
 .bio-text .plain {
   color: #1a1a1a;
   font-weight: 500;
   text-decoration: none;
-  border-bottom: 2px solid #c8c8c8;
-  padding-bottom: 1px;
-  transition: border-color 0.2s, background-color 0.2s;
+  border-bottom: none;
+  padding-bottom: 0;
+  transition: opacity 0.2s;
 }
 
 .bio-text .plain { font-weight: 400; }
 
 .bio-text a:hover,
 .bio-text .plain:hover {
-  border-color: #1a1a1a;
-  background-color: #f0f0f0;
+  opacity: 0.55;
   outline: none;
 }
 
@@ -199,13 +197,12 @@ h2::after {
   font-size: 0.85rem;
   font-weight: 500;
   color: #333;
-  text-decoration: underline;
-  text-decoration-color: #bbb;
-  text-underline-offset: 3px;
-  transition: color 0.2s, text-decoration-color 0.2s;
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.2s;
 }
 
-.cv-link:hover { color: #1a1a1a; text-decoration-color: #1a1a1a; }
+.cv-link:hover { opacity: 0.55; }
 
 
 .profile {
@@ -237,13 +234,11 @@ h2::after {
 .contact-inline a {
   color: #1a1a1a;
   font-weight: 500;
-  text-decoration: underline;
-  text-decoration-color: #bbb;
-  text-underline-offset: 3px;
-  transition: text-decoration-color 0.2s;
+  text-decoration: none;
+  transition: opacity 0.2s;
 }
 
-.contact-inline a:hover { text-decoration-color: #1a1a1a; outline: none; }
+.contact-inline a:hover { opacity: 0.55; outline: none; }
 
 .copy-button {
   display: inline-block;
@@ -311,14 +306,13 @@ ul.papers:not(.presentations-list) li i { color: #333; }
 }
 
 ul.papers:not(.presentations-list) li a {
-  color: #0047FF;
-  text-decoration: underline;
-  text-decoration-color: #0047FF;
-  text-underline-offset: 3px;
-  transition: color 0.2s;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
 }
 
-ul.papers:not(.presentations-list) li a:hover { color: #0030bb; }
+ul.papers:not(.presentations-list) li a:hover { opacity: 0.55; }
 
 .abstract {
   display: none;
@@ -367,14 +361,13 @@ ul.papers.presentations-list li b { font-weight: 600; color: #1a1a1a; }
 ul.papers.presentations-list li i { color: #333; }
 
 ul.papers.presentations-list li a {
-  color: #0047FF;
-  text-decoration: underline;
-  text-decoration-color: #0047FF;
-  text-underline-offset: 3px;
-  transition: color 0.2s;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
 }
 
-ul.papers.presentations-list li a:hover { color: #0030bb; }
+ul.papers.presentations-list li a:hover { opacity: 0.55; }
 
 .cv-viewer-wrap {
   display: flex;
@@ -456,15 +449,33 @@ footer {
 
 .social-icons a:hover { color: #1a1a1a; }
 
+/* ── Mobile ── */
 @media (max-width: 700px) {
-  .header-container { flex-direction: column; align-items: flex-start; gap: 12px; }
-  nav ul { gap: 20px; }
-  .bio-container { flex-direction: column; align-items: flex-start; }
-  .bio-text { order: 2; }
-  .profile { order: 1; width: 140px; }
-  ul.papers:not(.presentations-list) li { padding-left: 36px; }
-}
+  body { font-size: 15px; padding: 0 16px 60px; }
 
+  header { padding: 16px 0; margin-bottom: 48px; }
+
+  .header-text h1 { font-size: 1.35rem; }
+
+  .header-container { flex-direction: row; align-items: center; gap: 8px; }
+
+  nav ul { gap: 16px; }
+  nav ul li a { font-size: 0.82rem; }
+
+  .bio-container { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .bio-text { order: 2; flex: 1 1 100%; font-size: 0.95rem; }
+  .profile { order: 1; width: 110px; }
+
+  ul.papers:not(.presentations-list) li { padding-left: 36px; }
+
+  .bio-text a, .bio-text .plain { font-size: inherit; }
+
+  section { margin-bottom: 48px; }
+
+  h2 { font-size: 0.68rem; }
+
+  .contact-inline { margin-top: 36px; padding-top: 28px; }
+}
 </style>
 </head>
 
@@ -605,23 +616,17 @@ footer {
 
 <script>
 function showPage(pageId) {
-  // Hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  // Show target
   document.getElementById('page-' + pageId).classList.add('active');
-  // Update nav active state
   document.querySelectorAll('nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === pageId);
   });
-  // Scroll to top of content
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Set initial active nav link
   document.querySelector('nav a[data-page="about"]').classList.add('active');
 
-  // Abstract toggles
   document.querySelectorAll("button.toggle-abstract").forEach((button) => {
     const abstract = button.closest('li').querySelector('.abstract');
     abstract.style.display = "none";
@@ -636,7 +641,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Copy email button
   const copyButton = document.getElementById('copyEmailButton');
   if (copyButton) {
     copyButton.addEventListener('click', async () => {
