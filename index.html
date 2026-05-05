@@ -45,13 +45,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variant-numeric: oldstyle-nums;
-  font-size: 16px;
+  font-size: 14px;
 }
 
+body::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #1c1c1c;
+  z-index: 200;
+}
 
 header {
   position: sticky;
-  top: 0;
+  top: 6px; 
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -131,6 +142,10 @@ section {
   scroll-margin-top: 96px;
 }
 
+#page-research section {
+  margin-bottom: 20px;
+}
+
 
 h2 {
   font-size: 0.72rem;
@@ -163,7 +178,7 @@ h2::after {
 
 .bio-text {
   flex: 1 1 480px;
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #1a1a1a;
   line-height: 1.78;
   order: 2;
@@ -172,9 +187,16 @@ h2::after {
 .bio-text p { margin-bottom: 14px; }
 .bio-text p:last-child { margin-bottom: 0; }
 
+a {
+  color: #2563eb;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+a:hover { opacity: 0.65; }
+
 .bio-text a,
 .bio-text .plain {
-  color: #1a1a1a;
+  color: #333333;
   font-weight: 500;
   text-decoration: none;
   border-bottom: none;
@@ -195,7 +217,7 @@ h2::after {
   margin-top: 20px;
   font-size: 0.85rem;
   font-weight: 500;
-  color: #333;
+  color: #2563eb;
   text-decoration: none;
   opacity: 1;
   transition: opacity 0.2s;
@@ -263,30 +285,14 @@ ul.papers {
   flex-direction: column;
 }
 
-ul.papers:not(.presentations-list) {
-  counter-reset: pub-counter;
-}
-
 ul.papers:not(.presentations-list) li {
-  counter-increment: pub-counter;
   border-top: 1px solid #e8e8e8;
-  padding: 26px 0 26px 48px;
+  padding: 26px 0;  
   position: relative;
 }
 
 ul.papers:not(.presentations-list) li:last-child {
-  border-bottom: 1px solid #e8e8e8;
-}
-
-ul.papers:not(.presentations-list) li::before {
-  content: counter(pub-counter, decimal-leading-zero);
-  position: absolute;
-  left: 0;
-  top: 26px;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: #555;
-  letter-spacing: 0.04em;
+  border-bottom: none; 
 }
 
 ul.papers:not(.presentations-list) li b { color: #1a1a1a; font-weight: 600; }
@@ -305,7 +311,7 @@ ul.papers:not(.presentations-list) li i { color: #333; }
 }
 
 ul.papers:not(.presentations-list) li a {
-  color: #1a1a1a;
+  color: #2563eb;
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s;
@@ -340,11 +346,10 @@ button.toggle-abstract {
 }
 
 button.toggle-abstract:hover { color: #2e4f6e; }
-
 .presentations-divider {
-  margin: 56px 0 32px;
-  padding-top: 40px;
-  border-top: 1px solid #e8e8e8;
+  margin: 16px 0 20px;
+  padding-top: 0;
+  border-top: none; 
 }
 
 ul.papers.presentations-list li {
@@ -355,12 +360,12 @@ ul.papers.presentations-list li {
   line-height: 1.65;
 }
 
-ul.papers.presentations-list li:last-child { border-bottom: 1px solid #e8e8e8; }
+ul.papers.presentations-list li:last-child { border-bottom: none; }
 ul.papers.presentations-list li b { font-weight: 600; color: #1a1a1a; }
 ul.papers.presentations-list li i { color: #333; }
 
 ul.papers.presentations-list li a {
-  color: #1a1a1a;
+  color: #2563eb;
   text-decoration: none;
   font-weight: 500;
   transition: opacity 0.2s;
@@ -449,7 +454,7 @@ footer {
 .social-icons a:hover { color: #1a1a1a; }
 
 @media (max-width: 700px) {
-  body { font-size: 15px; padding: 0 16px 60px; }
+  body { font-size: 13px; padding: 0 16px 60px; }
 
   header { padding: 16px 0; margin-bottom: 48px; }
 
@@ -463,8 +468,6 @@ footer {
   .bio-container { flex-direction: column; align-items: flex-start; gap: 24px; }
   .bio-text { order: 2; flex: 1 1 100%; font-size: 0.95rem; }
   .profile { order: 1; width: 110px; }
-
-  ul.papers:not(.presentations-list) li { padding-left: 36px; }
 
   .bio-text a, .bio-text .plain { font-size: inherit; }
 
@@ -503,7 +506,6 @@ footer {
         <div class="bio-text">
           <p>I completed my M.A. at Middle East Technical University in Ankara, Turkey, where I was a member of the <a href="https://langcog.metu.edu.tr" rel="noopener noreferrer">METU Language and Cognitive Development Laboratory</a>. My M.A. research, conducted under the supervision of <a href="https://users.metu.edu.tr/duyguo/" target="_blank" rel="noopener noreferrer">Duygu (Özge) Sarısoy</a>, examined children's interpretation of disjunction in Turkish (<a href="https://open.metu.edu.tr/handle/11511/114462" class="plain">Thesis <sup style="font-size:0.65em; vertical-align:super; line-height:0;">↗</sup></a>, <a href="pdfs/thesispresentation.pdf" class="plain">Slides</a>). I received my B.A. in Foreign Language Education with minors in Psychology from the same institution in 2022.</p>
           <p>My research interests lie broadly in experimental semantics and pragmatics, with a particular focus on language acquisition. I have worked on ellipsis, conditionals, and disjunction in Turkish.</p>
-
         </div>
         <div class="profile">
           <img src="images/enesus-v2.webp" alt="Enes Us" width="500" height="1000">
@@ -574,6 +576,7 @@ footer {
       <li><b>Enes Us</b>. (2024). "Verb-Stranding VP Ellipsis in Turkish." Talk at the <i>Konstanz Linguistics Conference [KLC]</i>, University of Konstanz, March 21–22.</li>
     </ul>
   </div>
+
   <div class="page" id="page-cv">
     <section id="cv">
       <h2>Curriculum Vitae</h2>
@@ -588,7 +591,8 @@ footer {
           ></iframe>
           <div class="cv-fallback" id="cvFallback" style="display:none;">
             <p>Your browser cannot display the PDF inline.</p>
-<a href="https://enesuss.github.io/pdfs/enescv.pdf" download="UsEnes_CV.pdf">download pdf</a>
+            <a href="https://enesuss.github.io/pdfs/enescv.pdf" download="UsEnes_CV.pdf">download pdf</a>
+            <a href="https://enesuss.github.io/pdfs/enescv.pdf" target="_blank" rel="noopener noreferrer">
               <i class="fas fa-external-link-alt"></i> open cv in new tab
             </a>
           </div>
