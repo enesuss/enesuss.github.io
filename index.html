@@ -38,7 +38,7 @@ html { scroll-behavior: smooth; }
 }
 
 body {
-  font-family: 'Space Grotesk', -apple-system, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, -apple-system, sans-serif;
   max-width: 900px;
   margin: 0 auto;
   padding: 0 20px 80px;
@@ -48,7 +48,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-variant-numeric: oldstyle-nums;
-  font-size: 14px;
+  font-size: 14.5px;
+  overflow-x: hidden;
 }
 
 header {
@@ -136,6 +137,7 @@ section {
 
 
 h2 {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -144,8 +146,9 @@ h2 {
   margin-bottom: 24px;
   display: inline-block;
   position: relative;
-  padding: 0 0 0 10px;
-  border-left: 2px solid #1a1a1a;
+  padding: 0 0 8px 0;
+  border-left: none;
+  border-bottom: 3px solid rgba(26, 26, 26, 0.55);
 }
 
 h2::after {
@@ -168,7 +171,7 @@ h2::after {
   order: 2;
 }
 
-.bio-text p { margin-bottom: 14px; }
+.bio-text p { margin-bottom: 14px; text-align: justify; text-justify: inter-word; }
 .bio-text p:last-child { margin-bottom: 0; }
 
 a {
@@ -179,10 +182,11 @@ a {
 a:hover { opacity: 0.65; }
 
 .bio-text a {
-  color: #0057d8;
-  font-weight: 500;
-  text-decoration: none;
-  border-bottom: none;
+  color: #1a1a1a;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(26, 26, 26, 0.35);
+  text-underline-offset: 2px;
   padding-bottom: 0;
   transition: opacity 0.2s;
 }
@@ -247,25 +251,6 @@ a:hover { opacity: 0.65; }
 
 .contact-inline a:hover { opacity: 0.55; outline: none; }
 
-.copy-button {
-  display: inline-block;
-  margin-left: 10px;
-  padding: 2px 9px;
-  background: #f5f5f5;
-  color: #555;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 400;
-  vertical-align: middle;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-  transition: color 0.2s, border-color 0.2s, background 0.2s;
-}
-
-.copy-button:hover { color: #1a1a1a; border-color: #bbb; background: #ececec; }
-
 ul.papers {
   list-style: none;
   display: flex;
@@ -274,28 +259,21 @@ ul.papers {
 
 ul.papers:not(.presentations-list) li {
   border-top: 1px solid #e8e8e8;
-  padding: 26px 0;  
+  padding: 22px 0;  
   position: relative;
+  font-size: 0.92rem;
 }
 
 ul.papers:not(.presentations-list) li:last-child {
-  border-bottom: none; 
+  border-bottom: none;
+}
+
+ul.papers:not(.presentations-list) li:first-child {
+  border-top: none;
 }
 
 ul.papers:not(.presentations-list) li b { color: #1a1a1a; font-weight: 600; }
 ul.papers:not(.presentations-list) li i { color: #333; }
-
-.pub-status {
-  font-size: 0.68rem;
-  color: #888;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-  vertical-align: super;
-  line-height: 0;
-  margin-right: 4px;
-}
 
 ul.papers:not(.presentations-list) li a {
   color: #0057d8;
@@ -341,13 +319,14 @@ button.toggle-abstract:hover { opacity: 0.5; }
 
 ul.papers.presentations-list li {
   border-top: 1px solid #e8e8e8;
-  padding: 20px 0;
+  padding: 16px 0;
   font-size: 0.95rem;
   color: #1a1a1a;
   line-height: 1.65;
 }
 
 ul.papers.presentations-list li:last-child { border-bottom: none; }
+ul.papers.presentations-list li:first-child { border-top: none; }
 ul.papers.presentations-list li b { font-weight: 600; color: #1a1a1a; }
 ul.papers.presentations-list li i { color: #333; }
 
@@ -359,6 +338,7 @@ ul.papers.presentations-list li a {
 }
 
 ul.papers.presentations-list li a:hover { opacity: 0.55; }
+
 
 .cv-viewer-wrap {
   display: flex;
@@ -409,11 +389,13 @@ ul.papers.presentations-list li a:hover { opacity: 0.55; }
   text-align: center;
   color: #555;
   font-size: 0.95rem;
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   gap: 16px;
 }
+
+.cv-fallback.show { display: flex; }
 
 footer {
   text-align: center;
@@ -441,7 +423,7 @@ footer {
 .social-icons a:hover { color: #1a1a1a; }
 
 @media (max-width: 700px) {
-  body { font-size: 12.5px; padding: 0 16px 60px; }
+  body { font-size: 13px; padding: 0 16px 60px; }
 
   header { padding: 14px 0; margin-bottom: 30px; }
 
@@ -465,14 +447,18 @@ footer {
   .contact-inline { margin-top: 32px; }
   .contact-inline p { font-size: 0.9rem; }
 
-  ul.papers:not(.presentations-list) li { padding: 18px 0; }
-  ul.papers.presentations-list li { font-size: 0.88rem; padding: 16px 0; }
+  ul.papers:not(.presentations-list) li { padding: 16px 0; }
+  ul.papers.presentations-list li { font-size: 0.88rem; padding: 14px 0; }
 
   .abstract { font-size: 0.82rem; padding: 12px 14px; }
 
   button.toggle-abstract { font-size: 0.78rem; }
 
   .cv-embed-container iframe { height: 70vh; min-height: 400px; }
+
+  .cv-viewer-wrap,
+  .cv-embed-container { width: 100%; max-width: 100%; overflow: hidden; }
+  .cv-embed-container iframe { width: 100%; max-width: 100vw; }
 
   .cv-open-btn { font-size: 0.78rem; }
 
@@ -505,7 +491,7 @@ footer {
     <section id="about">
       <div class="bio-container">
         <div class="bio-text">
-          <p>I completed my M.A. at Middle East Technical University in Ankara, Turkey, where I was a member of the <a href="https://langcog.metu.edu.tr" rel="noopener noreferrer">METU Language and Cognitive Development Laboratory</a>. My M.A. research, conducted under the supervision of <a href="https://users.metu.edu.tr/duyguo/" target="_blank" rel="noopener noreferrer">Duygu (Özge) Sarısoy</a>, examined children's interpretation of disjunction in Turkish (<a href="https://open.metu.edu.tr/handle/11511/114462" class="plain">Thesis <sup style="font-size:0.65em; vertical-align:super; line-height:0;">↗</sup></a>, <a href="pdfs/thesispresentation.pdf" class="plain">Slides</a>). I received my B.A. in Foreign Language Education with minors in Psychology from the same institution in 2022.</p>
+          <p>I completed my M.A. at Middle East Technical University in Ankara, Turkey, where I was a member of the <a href="https://langcog.metu.edu.tr" rel="noopener noreferrer">METU Language and Cognitive Development Laboratory</a>. My M.A. research, conducted under the supervision of <a href="https://users.metu.edu.tr/duyguo/" target="_blank" rel="noopener noreferrer">Duygu (Özge) Sarısoy</a>, examined children's interpretation of disjunction in Turkish (<a href="https://open.metu.edu.tr/handle/11511/114462" class="plain">Thesis</a>, <a href="pdfs/thesispresentation.pdf" class="plain">Slides</a>). I received my B.A. in Foreign Language Education with minors in Psychology from the same institution in 2022.</p>
           <p>My research interests lie broadly in experimental semantics and pragmatics, with a particular focus on language acquisition. I have worked on ellipsis, conditionals, and disjunction in Turkish.</p>
         </div>
         <div class="profile">
@@ -527,6 +513,19 @@ footer {
       <ul class="papers">
         <li>
           <span itemscope itemtype="https://schema.org/ScholarlyArticle">
+            <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><b>Enes Us</b></span></span>,
+            <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Duygu Sarısoy</span></span>.
+            (accepted). <span itemprop="name">Morphological access to alternatives fails to boost scalar implicatures: Interpretation of disjunction in Turkish-speaking children,</span> <i itemprop="isPartOf">Language Acquisition</i>.
+          </span>
+          <div>
+            <button class="toggle-abstract" aria-expanded="false">abstract</button>
+          </div>
+          <div class="abstract">
+            Sentences involving disjunction, such as "The girl likes pizza or pasta" often give rise to the inference that she does not like both. However, several studies report that children tend to interpret the sentence inclusively (i.e., she likes pizza or pasta, or possibly both) or conjunctively (i.e., she likes both). The alternatives-based account attributes this to children's difficulty accessing stronger lexical alternatives, while the ambiguity account proposes that disjunction is ambiguous for children. In this study, we tested these competing predictions using a Truth-Value Judgment Task with Turkish-speaking children, drawing on the unique morphology of Turkish disjunction markers, one of which contains the stronger alternative. Overall, children interpreted disjunctions inclusively or conjunctively, but not exclusively, even when a disjunction marker could facilitate access to a stronger alternative. These findings challenge the alternatives-based account and align with the ambiguity account, suggesting that access to a stronger alternative alone is not sufficient for achieving adult-like interpretations.
+          </div>
+        </li>
+        <li>
+          <span itemscope itemtype="https://schema.org/ScholarlyArticle">
             <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><b>Enes Us</b></span></span>
             (2025). <span itemprop="isPartOf">
             Verb-Stranding VP Ellipsis in Turkish. In Barrie, Michael (ed.), <i>Proceedings of the 18th Workshop on Altaic Formal Linguistics</i>. MIT Working Papers in Linguistics, pp. 229–238. </span>
@@ -541,24 +540,9 @@ footer {
         </li>
         <li>
           <span itemscope itemtype="https://schema.org/ScholarlyArticle">
-            <span class="pub-status">under revision</span>
             <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><b>Enes Us</b></span></span>,
             <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Duygu Sarısoy</span></span>.
-            <span itemprop="name">"Morphological access to alternatives fails to boost scalar implicatures: Interpretation of disjunction in Turkish-speaking children."</span>
-          </span>
-          <div>
-            <button class="toggle-abstract" aria-expanded="false">abstract</button>
-          </div>
-          <div class="abstract">
-            Sentences involving disjunction, such as "The girl likes pizza or pasta" often give rise to the inference that she does not like both. However, several studies report that children tend to interpret the sentence inclusively (i.e., she likes pizza or pasta, or possibly both) or conjunctively (i.e., she likes both). The alternatives-based account attributes this to children's difficulty accessing stronger lexical alternatives, while the ambiguity account proposes that disjunction is ambiguous for children. In this study, we tested these competing predictions using a Truth-Value Judgment Task with Turkish-speaking children, drawing on the unique morphology of Turkish disjunction markers, one of which contains the stronger alternative. Overall, children interpreted disjunctions inclusively or conjunctively, but not exclusively, even when a disjunction marker could facilitate access to a stronger alternative. These findings challenge the alternatives-based account and align with the ambiguity account, suggesting that access to a stronger alternative alone is not sufficient for achieving adult-like interpretations.
-          </div>
-        </li>
-        <li>
-          <span itemscope itemtype="https://schema.org/ScholarlyArticle">
-            <span class="pub-status">in preparation</span>
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name"><b>Enes Us</b></span></span>,
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Duygu Sarısoy</span></span>.
-            <span itemprop="name">"X-Marking in Turkish"</span>
+            (in preparation). <span itemprop="name">X-Marking in Turkish.</span>
           </span>
         </li>
       </ul>
@@ -589,7 +573,7 @@ footer {
             type="application/pdf"
             loading="lazy"
           ></iframe>
-          <div class="cv-fallback" id="cvFallback" style="display:none;">
+          <div class="cv-fallback" id="cvFallback">
             <p>Your browser cannot display the PDF inline.</p>
             <a href="https://enesuss.github.io/pdfs/enescv.pdf" download="UsEnes_CV.pdf">download pdf</a>
             <a href="https://enesuss.github.io/pdfs/enescv.pdf" target="_blank" rel="noopener noreferrer">
@@ -617,17 +601,57 @@ footer {
 </footer>
 
 <script>
-function showPage(pageId) {
+function showPage(pageId, updateHash = true) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + pageId).classList.add('active');
   document.querySelectorAll('nav a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === pageId);
   });
+  if (updateHash) {
+    history.pushState(null, '', '#' + pageId);
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function pageFromHash() {
+  const valid = ['about', 'research', 'cv'];
+  const id = location.hash.replace('#', '');
+  return valid.includes(id) ? id : 'about';
+}
+
+window.addEventListener('popstate', () => {
+  showPage(pageFromHash(), false);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector('nav a[data-page="about"]').classList.add('active');
+  showPage(pageFromHash(), false);
+
+  const cvIframe = document.getElementById("cvIframe");
+  const cvFallback = document.getElementById("cvFallback");
+  if (cvIframe && cvFallback) {
+    const pdfUrl = "https://enesuss.github.io/pdfs/enescv.pdf";
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isSmallScreen = window.innerWidth <= 700;
+
+    // Native inline PDF rendering in iframes is unreliable on iOS Safari
+    // and small-screen mobile browsers, so route those through Google's
+    // viewer, which renders consistently across devices.
+    if (isIOS || isSmallScreen) {
+      cvIframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfUrl) + "&embedded=true";
+    }
+
+    let loaded = false;
+    cvIframe.addEventListener("load", () => { loaded = true; });
+
+    // If nothing loads within a few seconds (blocked, offline, or the
+    // embed silently fails), fall back to plain download/open links.
+    setTimeout(() => {
+      if (!loaded) {
+        cvIframe.style.display = "none";
+        cvFallback.classList.add("show");
+      }
+    }, 5000);
+  }
 
   document.querySelectorAll("button.toggle-abstract").forEach((button) => {
     const abstract = button.closest('li').querySelector('.abstract');
