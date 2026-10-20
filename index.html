@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="google-site-verification" content="aH9Zsv1f0-Q5vaEimcM0tLhp6hcAH5fBJDZeDC2NCOE" />
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="keywords" content="Enes Us, linguistics" />
@@ -631,9 +632,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const isSmallScreen = window.innerWidth <= 700;
 
-    // Native inline PDF rendering in iframes is unreliable on iOS Safari
-    // and small-screen mobile browsers, so route those through Google's
-    // viewer, which renders consistently across devices.
+
     if (isIOS || isSmallScreen) {
       cvIframe.src = "https://docs.google.com/viewer?url=" + encodeURIComponent(pdfUrl) + "&embedded=true";
     }
@@ -641,8 +640,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let loaded = false;
     cvIframe.addEventListener("load", () => { loaded = true; });
 
-    // If nothing loads within a few seconds (blocked, offline, or the
-    // embed silently fails), fall back to plain download/open links.
     setTimeout(() => {
       if (!loaded) {
         cvIframe.style.display = "none";
